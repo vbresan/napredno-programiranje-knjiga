@@ -1,7 +1,7 @@
 /* Unesi n i m (1 <= n, m <= 10), a zatim n redova sa po m brojeva u pojedinom
  * retku. n redova s po m brojeva opisuje polje n x m. Ispisi polje istih
  * dimenzija, gdje na mjestu pojedinog elementa pise suma svih brojeva koji
- * imaju manji ili jednak indeks stupca ili retka (suma svih elementa iznad i 
+ * imaju manji ili jednak indeks stupca ili retka (suma svih elementa iznad i
  * lijevo u polju).
  */
 

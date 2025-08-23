@@ -11,18 +11,18 @@
 
 int main() {
 
-    int n, x, a[100], lopta = 0; // lopta je kod 1. djeteta
-    scanf("%d %d", &n, &x);
+  int n, x, a[100], lopta = 0; // lopta je kod 1. djeteta
+  scanf("%d %d", &n, &x);
 
-    for (int i = 0; i < n; i++) {
-	scanf("%d", &a[i]);
-    }
+  for (int i = 0; i < n; i++) {
+    scanf("%d", &a[i]);
+  }
 
-    for (int i = 0; i < x; i++) {
-	lopta = a[lopta] - 1;
-	printf("%d ", lopta + 1);
-    }
+  for (int i = 0; i < x; i++) {
+    lopta = a[lopta] - 1;
+    printf("%d ", lopta + 1);
+  }
 
-    printf("\n");
-    return 0;
+  printf("\n");
+  return 0;
 }

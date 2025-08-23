@@ -1,4 +1,4 @@
-/* Unesi x. Ispisi sumu brojeva x i "okrenutog" broja x. 
+/* Unesi x. Ispisi sumu brojeva x i "okrenutog" broja x.
    (Kada okrenemo 1234 dobijemo 4321)
 */
 
@@ -6,16 +6,16 @@
 
 int main() {
 
-    int x, a, b;
+  int x, a, b;
 
-    scanf("%d", &x);
-    a = x;
-    b = 0;
+  scanf("%d", &x);
+  a = x;
+  b = 0;
 
-    for (; x > 0; x /= 10) {
-	b = b * 10 + x % 10;
-    }
+  for (; x > 0; x /= 10) {
+    b = b * 10 + x % 10;
+  }
 
-    printf("%d\n", a + b);
-    return 0;
+  printf("%d\n", a + b);
+  return 0;
 }

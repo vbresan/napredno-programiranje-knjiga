@@ -1,12 +1,12 @@
 /*
-* Napisi program koji unosi broj odigranih nogometnih utakmica 
-* n (1 <= n <= 100) i u sljedecih n redova po 4 cijela broja a, b, c i d. Pri 
-* tom su a i b (1 <= a, b <= 10) redni brojevi nogometnih ekipa koje su 
-* odigrale utakmicu s rezultatom c:d (0 <= c, d <= 15) (ekipa a je dala c 
-* zgoditaka, dok je ekipa b dala d zgoditaka). Nakon toga se unosi m 
-* (1 <= m <= 20), a zatim m parova prirodnih brojeva x i y (1 <= x, y <= 10).
-* Za svaki par ispisi koliko ukupno zgoditaka je ekipa x dala ekipi y.
-*/
+ * Napisi program koji unosi broj odigranih nogometnih utakmica
+ * n (1 <= n <= 100) i u sljedecih n redova po 4 cijela broja a, b, c i d. Pri
+ * tom su a i b (1 <= a, b <= 10) redni brojevi nogometnih ekipa koje su
+ * odigrale utakmicu s rezultatom c:d (0 <= c, d <= 15) (ekipa a je dala c
+ * zgoditaka, dok je ekipa b dala d zgoditaka). Nakon toga se unosi m
+ * (1 <= m <= 20), a zatim m parova prirodnih brojeva x i y (1 <= x, y <= 10).
+ * Za svaki par ispisi koliko ukupno zgoditaka je ekipa x dala ekipi y.
+ */
 
 #include <stdio.h>
 
