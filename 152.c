@@ -1,13 +1,14 @@
 /* Unesi n (1 <= n <= 1000) i ispisi koliko znamenaka jednakih jedinici sadrzi
  * umnozak prvih n prirodnih brojeva n! */
 
-/* 1000! has 2,568 digits. When using 1,000,000,000-sized blocks it is 286
- * blocks. */
+/* 1000! has 2,568 digits. When using 1,000,000-sized blocks it is 428
+ * blocks. 1,000,000 is the largest power of 10 block that won't  have
+ * integer overflow when multiplied by 1,000 (largest n). */
 
 #include <stdio.h>
 
-#define BLOCK_SIZE 10000 // 1000000000
-#define BLOCK_NUM 1000   // 286
+#define BLOCK_SIZE 1000000
+#define BLOCK_NUM 428
 
 int main() {
 
@@ -29,7 +30,6 @@ int main() {
   int count = 0;
   for (int i = 0; i < BLOCK_NUM; i++) {
     int block = a[i];
-    printf("%d ", block);
     while (block) {
       if (block % 10 == 1) {
         count++;
