@@ -33,8 +33,10 @@ int is_safe(int array[], int start) {
 void permute(int array[], int start, int end) {
 
   if (start == end) {
-    // print_array(array, end);
-    solutions++;
+    if (is_safe(array, start)) {
+      // print_array(array, end);
+      solutions++;
+    }
     return;
   }
 
