@@ -18,14 +18,19 @@ void swap(int array[], int i, int j) {
   array[j] = temp;
 }
 
-void permute(int array[], int start, int end) {
+int is_safe(int array[], int start) {
 
   for (int i = 0; i < start; i++) {
-    if (array[i] + i == array[start - 1] + (start - 1) ||
-        array[i] - i == array[start - 1] - (start - 1)) {
-      return;
+    if (array[i] + i == array[start] + start ||
+        array[i] - i == array[start] - start) {
+      return 0;
     }
   }
+
+  return 1;
+}
+
+void permute(int array[], int start, int end) {
 
   if (start == end) {
     // print_array(array, end);
@@ -35,7 +40,11 @@ void permute(int array[], int start, int end) {
 
   for (int i = start; i <= end; i++) {
     swap(array, start, i);
-    permute(array, start + 1, end);
+
+    if (is_safe(array, start)) {
+      permute(array, start + 1, end);
+    }
+
     swap(array, start, i);
   }
 }
