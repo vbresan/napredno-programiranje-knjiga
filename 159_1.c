@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 
+int solutions;
+
 void print_array(int array[], int end) {
   for (int i = 0; i <= end; i++) {
     printf("%d ", array[i]);
@@ -12,17 +14,15 @@ void print_array(int array[], int end) {
 
 void check_diagonals(int array[], int end) {
   for (int i = 0; i < end; i++) {
-    int invalid = 0;
-    for (int j = i + 1; j <= end && !invalid; j++) {
+    for (int j = i + 1; j <= end; j++) {
       if (array[i] + i == array[j] + j || array[i] - i == array[j] - j) {
-        //        printf("Invlid\n");
-        invalid = 1;
+        return;
       }
     }
-    if (!invalid) {
-      print_array(array, end);
-    }
   }
+
+  // print_array(array, end);
+  solutions++;
 }
 
 void swap(int array[], int i, int j) {
@@ -34,8 +34,8 @@ void swap(int array[], int i, int j) {
 void permute(int array[], int start, int end) {
 
   if (start == end) {
-    print_array(array, end);
-    // check_diagonals(array, end);
+    // print_array(array, end);
+    check_diagonals(array, end);
     return;
   }
 
@@ -52,6 +52,7 @@ int main() {
   int n = sizeof(columns) / sizeof(columns[0]);
 
   permute(columns, 0, n - 1);
+  printf("%d\n", solutions);
 
   return 0;
 }
