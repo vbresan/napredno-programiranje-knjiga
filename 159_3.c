@@ -39,6 +39,7 @@ void solve_n_queens(int board[], int column, int n) {
 
   for (int row = 0; row < n; row++) {
     if (is_safe(board, row, column, n)) {
+      board[column] = row;
       solve_n_queens(board, column + 1, n);
     }
   }
