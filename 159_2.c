@@ -21,10 +21,9 @@ void swap(int array[], int i, int j) {
 void permute(int array[], int start, int end) {
 
   for (int i = 0; i < start; i++) {
-    for (int j = i + 1; j <= start; j++) {
-      if (array[i] + i == array[j] + j || array[i] - i == array[j] - j) {
-        return;
-      }
+    if (array[i] + i == array[start - 1] + (start - 1) ||
+        array[i] - i == array[start - 1] - (start - 1)) {
+      return;
     }
   }
 
