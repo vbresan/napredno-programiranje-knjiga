@@ -14,11 +14,18 @@ dvaju brojeva iz istog stupca ili zamjena dvaju susjednih brojeva u istom
 retku. Ulazni podaci su 6 brojeva koji predstavljaju sadržaj slagalice.
 */
 
+#define MAX_TRIES 1000
+
 #include <stdio.h>
 
 int visited[6][6][6][6][6][6]; // a-f, 0-5
+int max_depth = 1;
 
 void solve(int a, int b, int c, int d, int e, int f, int depth) {
+
+  if (depth > max_depth) {
+    return;
+  }
 
   if (visited[a - 1][b - 1][c - 1][d - 1][e - 1][f - 1]) {
     if (visited[a - 1][b - 1][c - 1][d - 1][e - 1][f - 1] < depth) {
@@ -70,9 +77,15 @@ int main() {
 
   int a, b, c, d, e, f;
   scanf("%d %d %d %d %d %d", &a, &b, &c, &d, &e, &f);
-  solve(a, b, c, d, e, f, 1);
 
-  int depth = visited[0][1][2][3][4][5];
+  int depth = 0;
+  while (!depth && max_depth <= MAX_TRIES) {
+    solve(a, b, c, d, e, f, 1);
+    depth = visited[0][1][2][3][4][5];
+    max_depth++;
+  }
+
+  // It is not working when solution is not possible. It loops forever.
   if (depth) {
     backtrack(1, 2, 3, 4, 5, 6, depth);
   } else {
