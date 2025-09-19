@@ -28,6 +28,10 @@ void solve(int a, int b, int c, int d, int e, int f, int depth) {
 
   visited[a - 1][b - 1][c - 1][d - 1][e - 1][f - 1] = depth;
 
+  if (a == 1 && b == 2 && c == 3 && d == 4 && e == 5 && f == 6) {
+    return;
+  }
+
   solve(d, b, c, a, e, f, depth + 1);
   solve(a, e, c, d, b, f, depth + 1);
   solve(a, b, f, d, e, c, depth + 1);
