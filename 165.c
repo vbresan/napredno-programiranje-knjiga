@@ -8,7 +8,7 @@ typedef struct Node {
   struct Node *next;
 } Node;
 
-Node *head, *last;
+Node *first, *last;
 
 int enqueue(int data) {
 
@@ -20,8 +20,8 @@ int enqueue(int data) {
   current->data = data;
   current->next = 0;
 
-  if (!head) {
-    head = current;
+  if (!first) {
+    first = current;
   }
 
   if (last) {
@@ -34,16 +34,16 @@ int enqueue(int data) {
 
 int dequeue(int *data) {
 
-  if (!head) {
+  if (!first) {
     return 0;
   }
 
-  Node *current = head;
+  Node *current = first;
   *data = current->data;
-  head = current->next;
+  first = current->next;
   free(current);
 
-  if (!head) {
+  if (!first) {
     last = 0;
   }
 
@@ -53,7 +53,7 @@ int dequeue(int *data) {
 void print_queue() {
 
   printf("Curent queue: ");
-  for (Node *current = head; current; current = current->next) {
+  for (Node *current = first; current; current = current->next) {
     printf("%d ", current->data);
   }
   printf("\n");
