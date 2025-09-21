@@ -8,9 +8,11 @@ typedef struct Node {
   struct Node *next;
 } Node;
 
-Node *first, *last;
+typedef struct {
+  Node *first, *last;
+} Queue;
 
-int enqueue(int data) {
+int enqueue(Queue *queue, int data) {
 
   Node *current = malloc(sizeof(Node));
   if (!current) {
@@ -20,53 +22,64 @@ int enqueue(int data) {
   current->data = data;
   current->next = 0;
 
-  if (!first) {
-    first = current;
+  if (!queue->first) {
+    queue->first = current;
   }
 
-  if (last) {
-    last->next = current;
+  if (queue->last) {
+    queue->last->next = current;
   }
-  last = current;
+  queue->last = current;
 
   return 1;
 }
 
-int dequeue(int *data) {
+int dequeue(Queue *queue, int *data) {
 
-  if (!first) {
+  if (!queue->first) {
     return 0;
   }
 
-  Node *current = first;
+  Node *current = queue->first;
   *data = current->data;
-  first = current->next;
+  queue->first = current->next;
   free(current);
 
-  if (!first) {
-    last = 0;
+  if (!queue->first) {
+    queue->last = 0;
   }
 
   return 1;
 }
 
-void print_queue() {
+void print_queue(const Queue *queue) {
 
   printf("Curent queue: ");
-  for (Node *current = first; current; current = current->next) {
+  for (Node *current = queue->first; current; current = current->next) {
     printf("%d ", current->data);
   }
   printf("\n");
 }
 
-void free_queue() {
+void free_queue(Queue *queue) {
   int dummy;
-  while (dequeue(&dummy)) {
+  while (dequeue(queue, &dummy)) {
     // do nothing
   }
 }
 
+Queue get_queue() {
+
+  Queue queue;
+  queue.first = 0;
+  queue.last = 0;
+
+  return queue;
+}
+
 int main() {
+
+  Queue queue = get_queue();
 
   int choice;
   while (1) {
@@ -78,8 +91,8 @@ int main() {
 
       int x;
       scanf("%d", &x);
-      if (enqueue(x)) {
-        print_queue();
+      if (enqueue(&queue, x)) {
+        print_queue(&queue);
       } else {
         printf("Can't enqueue, the memory is full.\n");
       }
@@ -87,9 +100,9 @@ int main() {
     } else if (choice == 2) {
 
       int x;
-      if (dequeue(&x)) {
+      if (dequeue(&queue, &x)) {
         printf("%d\n", x);
-        print_queue();
+        print_queue(&queue);
       } else {
         printf("Can't dequeue, the queue is empty.\n");
       }
@@ -99,7 +112,7 @@ int main() {
     }
   }
 
-  free_queue();
+  free_queue(&queue);
 
   return 0;
 }
