@@ -10,7 +10,7 @@ typedef struct Node {
 
 Node *head, *last;
 
-int push(int data) {
+int enqueue(int data) {
 
   Node *current = malloc(sizeof(Node));
   if (!current) {
@@ -32,7 +32,7 @@ int push(int data) {
   return 1;
 }
 
-int pop(int *data) {
+int dequeue(int *data) {
 
   if (!head) {
     return 0;
@@ -59,38 +59,47 @@ void print_queue() {
   printf("\n");
 }
 
+void free_queue() {
+  int dummy;
+  while (dequeue(&dummy)) {
+    // do nothing
+  }
+}
+
 int main() {
 
   int choice;
   while (1) {
 
-    printf("1: Push\n2: Pop\n3: Quit\n");
+    printf("1: Enqueue\n2: Dequeue\n3: Quit\n");
     scanf("%d", &choice);
 
     if (choice == 1) {
 
       int x;
       scanf("%d", &x);
-      if (push(x)) {
+      if (enqueue(x)) {
         print_queue();
       } else {
-        printf("Can't push, the queue is full.\n");
+        printf("Can't enqueue, the memory is full.\n");
       }
 
     } else if (choice == 2) {
 
       int x;
-      if (pop(&x)) {
+      if (dequeue(&x)) {
         printf("%d\n", x);
         print_queue();
       } else {
-        printf("Can't pop, the queue is empty.\n");
+        printf("Can't dequeue, the queue is empty.\n");
       }
 
     } else {
       break;
     }
   }
+
+  free_queue();
 
   return 0;
 }
