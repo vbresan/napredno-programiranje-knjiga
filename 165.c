@@ -3,12 +3,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Node_t {
+typedef struct Node {
   int data;
-  struct Node_t *next;
-};
-
-typedef struct Node_t Node;
+  struct Node *next;
+} Node;
 
 Node *head, *last;
 
@@ -44,6 +42,10 @@ int pop(int *data) {
   *data = current->data;
   head = current->next;
   free(current);
+
+  if (!head) {
+    last = 0;
+  }
 
   return 1;
 }
