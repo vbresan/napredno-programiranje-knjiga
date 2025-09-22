@@ -1,6 +1,6 @@
 /* Učiteljica vodi djecu u zabavni park. Kada se djeca zabavljaju učiteljica
  * to mora platiti, a kada se ne zabavljaju ne mora. Svako dijete unaprijed
- * odabere od kada do kada će se za- bavljati. Učiteljica svaku minutu mora
+ * odabere od kada do kada će se zabavljati. Učiteljica svaku minutu mora
  * platiti ovisno o broju djece koji se tu minutu zabavljaju. Pri tome
  * učiteljica dobiva popust ako se više djece zabavlja. Unos se sastoji
  * od dva broja n (1 <= n <= 100000) i m (1 <= m <= 1000000). Zatim slijedi

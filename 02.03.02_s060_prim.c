@@ -1,3 +1,6 @@
+/* Zadana su dva broja a i b (2 <= a < b <= 10000). Napravi program koji
+ * ispisuje sve proste (prim) brojeve iz intervala [a, b]. */
+
 #include <stdio.h>
 
 int main() {
