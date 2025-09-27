@@ -8,4 +8,14 @@ kojom može trčati i dio brzine y_i, (1 <= y_i <= 1000) koju gubi za svako
 dijete koje ga vuče ili koga on vuče (jer postaje nestabilno i može pasti). 
 Djeca se mogu međusobno vući tako što dio svoje snage utroše na povlačenje 
 drugog djeteta. Koliko najbrže lanac djece može trčati?
+
+Unos se sastoji od cijelih brojeva i počinje brojem n. Nakon toga slijedi
+n parova brojeva x i y koji opisuju pojedino dijete. Djeca se drže za ruke
+onim redom kojim su navedeni u unosu. Ispišite najveću brzinu (na 3 decimale)
+kojom djeca mogu trčati u lancu.
+
+out 1 = 21.5
+out 2 = 20
+out 3 = 20
+out 4 = 77.750
 */
