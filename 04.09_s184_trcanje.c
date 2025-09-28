@@ -18,6 +18,10 @@ out 1 = 21.5
 out 2 = 20
 out 3 = 20
 out 4 = 77.750
+out 5 = 76
+out 6 = 22
+out 7 = 28
+out 8 = 26.4
 */
 
 #include <stdio.h>
