@@ -10,5 +10,26 @@ sjevera, nema s istoka, ima s juga i nema sa zapada. Opis će biti takav
 da tvornica ima zidove s vanjske strane. Ispiši za svaku prostoriju njenu 
 veličinu. Ispiši prostorije od veće prema manjoj.
 
+Ako je tvornica opisana sa:
+9 14 11 12 13
+5 15 11  6  7
+5  9 14  9 14
+3  2 14  3 14
+
+onda je u pitanju izgled:
+
+┌─────────┬─────────┬────┐
+│1001 1110│1011 1100│1101│
+│    ┌────┼────     │    │
+│0101│1111│1011 0110│0111│
+│    ├────┴────┬────┴────┤
+│0101│1001 1110│1001 1110│
+│          ────┤     ────┤
+│0011 0010 1110│0011 1110│
+└──────────────┴─────────┘
+
+
+out: 9 4 4 2 1
+
 */
 
