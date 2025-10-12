@@ -34,6 +34,7 @@ out: 9 4 4 2 1
 */
 
 #include <algorithm>
+#include <functional>
 #include <iostream>
 #include <iterator>
 #include <vector>
@@ -41,8 +42,6 @@ out: 9 4 4 2 1
 using namespace std;
 
 int n, m;
-int count;
-
 vector<vector<int>> factory;
 vector<vector<int>> visited;
 
@@ -52,33 +51,33 @@ struct Move {
 const struct Move moves[] = {
     {-1, 0, 0b1000}, {1, 0, 0b0010}, {0, -1, 0b0001}, {0, 1, 0b0100}};
 
-void floodFill(int x, int y) {
+int floodFill(int x, int y) {
 
-  if (visited[x][y]) {
-    return;
+  if (x < 0 || x >= n || y < 0 || y >= m || visited[x][y]) {
+    return 0;
   }
 
   visited[x][y] = 1;
-  ::count++;
+  int roomSize = 1;
 
   for (int i = 0; i < 4; i++) {
-    if ((x + moves[i].x >= 0 && x + moves[i].x < n) &&
-        (y + moves[i].y >= 0 && y + moves[i].y < m) &&
-        !(factory[x][y] & moves[i].wall)) {
-      floodFill(x + moves[i].x, y + moves[i].y);
+    if (!(factory[x][y] & moves[i].wall)) {
+      roomSize += floodFill(x + moves[i].x, y + moves[i].y);
     }
   }
+
+  return roomSize;
 }
 
 int main() {
 
   cin >> n >> m;
-  factory.resize(n, vector<int>());
+  factory.resize(n, vector<int>(m));
   visited.resize(n, vector<int>(m, 0));
 
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < m; j++) {
-      factory[i].push_back(*istream_iterator<int>(cin));
+      factory[i][j] = *istream_iterator<int>(cin);
     }
   }
 
@@ -86,17 +85,14 @@ int main() {
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < m; j++) {
       if (!visited[i][j]) {
-        ::count = 0;
-        floodFill(i, j);
-        solutions.push_back(::count);
+        solutions.push_back(floodFill(i, j));
       }
     }
   }
 
-  sort(solutions.begin(), solutions.end());
-  reverse(solutions.begin(), solutions.end());
-  for (int rooms : solutions) {
-    cout << rooms << ' ';
+  sort(solutions.begin(), solutions.end(), greater<int>());
+  for (int roomSize : solutions) {
+    cout << roomSize << ' ';
   }
   cout << endl;
 
