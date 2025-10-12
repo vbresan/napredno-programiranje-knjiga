@@ -57,8 +57,8 @@ int main() {
     }
   }
 
-  for (int i = 0; i < n; i++) {
-    cout << distances[i] << " ";
+  for (int distance : distances) {
+    cout << distance << " ";
   }
   cout << endl;
 
