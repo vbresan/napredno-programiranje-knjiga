@@ -14,7 +14,6 @@ out:
 */
 
 #include <iostream>
-#include <ostream>
 #include <vector>
 
 using namespace std;
@@ -41,17 +40,17 @@ int main() {
 
   for (int i = 0; i < n - 1; i++) {
 
-    int distance = INF + 1, node;
+    int min_distance = INF + 1, min_node;
     for (int j = 0; j < n; j++) {
-      if (distances[j] < distance && !visited[j]) {
-        distance = distances[j];
-        node = j;
+      if (distances[j] < min_distance && !visited[j]) {
+        min_distance = distances[j];
+        min_node = j;
       }
     }
 
-    visited[node] = true;
+    visited[min_node] = true;
     for (int j = 0; j < n; j++) {
-      int updated = distance + graph[node][j];
+      int updated = min_distance + graph[min_node][j];
       if (distances[j] > updated) {
         distances[j] = updated;
       }
