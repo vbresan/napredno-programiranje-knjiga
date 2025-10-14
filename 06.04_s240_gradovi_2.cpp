@@ -5,7 +5,7 @@
 
 using namespace std;
 
-const int INF = 1'000'000;
+constexpr int INF = numeric_limits<int>::max() / 2;
 
 int main() {
 
@@ -13,12 +13,12 @@ int main() {
   cin >> n >> m >> x;
 
   // (index, distance)
-  vector<vector<pair<int, int>>> graph(n, vector<pair<int, int>>());
+  vector<vector<pair<int, int>>> graph(n);
   for (int i = 0; i < m; i++) {
     int a, b, c;
     cin >> a >> b >> c;
-    graph[a].push_back(make_pair(b, c));
-    graph[b].push_back(make_pair(a, c));
+    graph[a].emplace_back(b, c);
+    graph[b].emplace_back(a, c);
   }
 
   vector<int> distances(n, INF);
@@ -27,31 +27,30 @@ int main() {
   // (distance, index) => because set is sorted by the first element
   set<pair<int, int>> closest;
   for (int i = 0; i < n; i++) {
-    closest.insert(make_pair(INF, i));
+    closest.emplace(INF, i);
   }
-  closest.erase(make_pair(INF, x));
-  closest.insert(make_pair(0, x));
+  closest.erase({INF, x});
+  closest.emplace(0, x);
 
-  vector<bool> visited(n, 0);
+  vector<bool> visited(n, false);
   vector<int> parent(n, -1);
 
   for (int i = 0; i < n - 1; i++) {
 
-    int min_distance = closest.begin()->first;
-    int min_node = closest.begin()->second;
+    const auto [min_distance, min_node] = *closest.begin();
     closest.erase(closest.begin());
 
     visited[min_node] = true;
-    for (pair<int, int> neighbor : graph[min_node]) {
-      if (!visited[neighbor.first]) {
-        int updated = min_distance + neighbor.second;
-        if (distances[neighbor.first] > updated) {
+    for (auto [neighbor, distance] : graph[min_node]) {
+      if (!visited[neighbor]) {
+        int updated = min_distance + distance;
+        if (distances[neighbor] > updated) {
 
-          closest.erase(make_pair(distances[neighbor.first], neighbor.first));
-          closest.insert(make_pair(updated, neighbor.first));
-          distances[neighbor.first] = updated;
+          closest.erase({distances[neighbor], neighbor});
+          closest.emplace(updated, neighbor);
+          distances[neighbor] = updated;
 
-          parent[neighbor.first] = min_node;
+          parent[neighbor] = min_node;
         }
       }
     }
