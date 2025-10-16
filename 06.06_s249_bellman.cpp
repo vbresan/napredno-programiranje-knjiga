@@ -17,9 +17,9 @@ output:
 
 using namespace std;
 
-typedef struct {
+struct Edge {
   int from, to, distance;
-} Edge;
+};
 
 constexpr int INF = numeric_limits<int>::max() / 2;
 
@@ -28,7 +28,7 @@ int main() {
   int n, m, x;
   cin >> n >> m >> x;
 
-  Edge edges[m];
+  vector<Edge> edges(m);
   for (int i = 0; i < m; i++) {
     cin >> edges[i].from >> edges[i].to >> edges[i].distance;
   }

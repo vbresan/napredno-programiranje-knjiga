@@ -11,7 +11,7 @@ int main() {
   int n, m, x;
   cin >> n >> m >> x;
 
-  vector<vector<pair<int, int>>> graph(n, vector<pair<int, int>>());
+  vector<vector<pair<int, int>>> graph(n);
   for (int i = 0; i < m; i++) {
     int a, b, c;
     cin >> a >> b >> c;
