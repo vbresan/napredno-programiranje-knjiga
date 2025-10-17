@@ -26,7 +26,7 @@ void euler(int from) {
     int to = graph[from].back();
     graph[from].pop_back();
     euler(to);
-    path.emplace_back(from);
+    path.push_back(from);
   }
 }
 
