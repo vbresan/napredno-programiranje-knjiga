@@ -17,8 +17,6 @@ output: 4
 #include <array>
 #include <deque>
 #include <iostream>
-#include <list>
-#include <utility>
 #include <vector>
 using namespace std;
 
