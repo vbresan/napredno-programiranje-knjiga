@@ -14,57 +14,63 @@ output: 4
 
 */
 
+#include <array>
+#include <deque>
 #include <iostream>
 #include <list>
 #include <utility>
 #include <vector>
 using namespace std;
 
-const struct Step {
+struct Step {
   int x, y;
-} steps[] = {{-1, -1}, {-1, 0}, {-1, 1}, {0, 1},
-             {1, 1},   {1, 0},  {1, -1}, {0, -1}};
+};
+
+constexpr array<Step, 8> STEPS = {
+    {{-1, -1}, {-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}}};
+
+struct Node {
+  int x, y, distance;
+};
 
 int main() {
 
   int n, m;
   cin >> n >> m;
 
-  vector<string> map(n);
+  vector<string> grid(n);
   for (int i = 0; i < n; ++i) {
-    cin >> map[i];
+    cin >> grid[i];
   }
 
-  list<pair<pair<int, int>, int>> nodes; // ((x, y), distance)
-  nodes.emplace_back(make_pair(0, 0), 0);
+  deque<Node> queue;
+  queue.push_back({0, 0, 0});
+  grid[0][0] = '#';
 
-  while (!nodes.empty()) {
+  while (!queue.empty()) {
 
-    const auto [coordinates, distance] = nodes.back();
-    const auto [x, y] = coordinates;
-    nodes.pop_back();
+    const auto [x, y, distance] = queue.back();
+    queue.pop_back();
 
     if (x == n - 1 && y == m - 1) {
       cout << distance << endl;
       break;
     }
 
-    map[x][y] = '#'; // mark as visited
-    for (int i = 0; i < 8; ++i) {
+    for (const auto &step : STEPS) {
 
-      const int neighbor_x = x + steps[i].x;
-      const int neighbor_y = y + steps[i].y;
-      if ((neighbor_x < 0 || neighbor_x >= n) ||
-          (neighbor_y < 0 || neighbor_y >= m) ||
-          map[neighbor_x][neighbor_y] == '#') {
+      const int nx = x + step.x;
+      const int ny = y + step.y;
+      if (nx < 0 || nx >= n || ny < 0 || ny >= m || grid[nx][ny] == '#') {
         continue;
       }
 
-      if (map[neighbor_x][neighbor_y] == 'x') {
-        nodes.emplace_front(make_pair(neighbor_x, neighbor_y), distance + 1);
+      if (grid[nx][ny] == 'x') {
+        queue.push_front({nx, ny, distance + 1});
       } else {
-        nodes.emplace_back(make_pair(neighbor_x, neighbor_y), distance);
+        queue.push_back({nx, ny, distance});
       }
+      grid[nx][ny] = '#';
     }
   }
 
