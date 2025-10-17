@@ -54,9 +54,9 @@ int main() {
 
       const int neighbor_x = x + steps[i].x;
       const int neighbor_y = y + steps[i].y;
-      if (map[neighbor_x][neighbor_y] == '#' ||
-          (neighbor_x < 0 || neighbor_x >= n) ||
-          (neighbor_y < 0 || neighbor_y >= m)) {
+      if ((neighbor_x < 0 || neighbor_x >= n) ||
+          (neighbor_y < 0 || neighbor_y >= m) ||
+          map[neighbor_x][neighbor_y] == '#') {
         continue;
       }
 
