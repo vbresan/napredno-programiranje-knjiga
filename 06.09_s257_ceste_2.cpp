@@ -13,15 +13,11 @@ output: 32
 
 */
 
-#include <algorithm>
 #include <iostream>
-#include <limits>
 #include <set>
 #include <utility>
 #include <vector>
 using namespace std;
-
-constexpr int INF = numeric_limits<int>::max();
 
 int main() {
 
