@@ -11,12 +11,14 @@ potreban trošak za povezivanje svih n gradova. (Gradovi će se moći povezati.)
 
 */
 
+#include <algorithm>
 #include <iostream>
+#include <limits>
 #include <utility>
 #include <vector>
 using namespace std;
 
-const int INF = 1000000;
+constexpr int INF = numeric_limits<int>::max();
 
 int main() {
 
