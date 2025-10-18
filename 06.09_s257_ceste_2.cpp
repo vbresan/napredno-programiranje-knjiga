@@ -33,26 +33,28 @@ int main() {
   }
 
   vector<bool> visited(n, false);
-  set<pair<int, int>> costs; // (cost, index)
-  costs.emplace(0, 0);
+  set<pair<int, int>> edges; // (cost, node)
+  edges.emplace(0, 0);
 
   int total_cost = 0;
-  int edges_added = 0;
-  while (edges_added < n) {
+  int nodes_added = 0;
+  while (nodes_added < n) {
 
-    const auto [min_cost, min_node] = *costs.begin();
-    costs.erase(costs.begin());
+    const auto [min_cost, min_node] = *edges.begin();
+    edges.erase(edges.begin());
 
     if (visited[min_node]) {
       continue;
     }
 
     total_cost += min_cost;
-    ++edges_added;
+    ++nodes_added;
     visited[min_node] = true;
 
-    for (pair<int, int> neighbor : graph[min_node]) {
-      costs.emplace(neighbor);
+    for (const auto &[cost, next_node] : graph[min_node]) {
+      if (!visited[next_node]) {
+        edges.emplace(cost, next_node);
+      }
     }
   }
 
