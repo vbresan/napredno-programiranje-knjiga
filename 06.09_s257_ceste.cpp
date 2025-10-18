@@ -25,40 +25,36 @@ int main() {
   int n, m;
   cin >> n >> m;
 
-  vector<vector<pair<int, int>>> graph(n);
+  vector<vector<int>> graph(n, vector<int>(n, INF));
   for (int i = 0; i < m; ++i) {
     int a, b, c;
     cin >> a >> b >> c;
-    graph[a].emplace_back(b, c);
-    graph[b].emplace_back(a, c);
+    graph[a][b] = graph[b][a] = c;
   }
 
   vector<bool> visited(n, false);
-  vector<int> nodes(n);
-  nodes.push_back(0);
-  visited[0] = true;
+  vector<int> costs(n, INF);
+  costs[0] = 0;
 
   int total_cost = 0;
-  for (int i = 0; i < n - 1; ++i) {
+  for (int i = 0; i < n; ++i) {
     int min_cost = INF;
     int min_node = 0;
-    for (const int from : nodes) {
-      for (const auto [to, cost] : graph[from]) {
-
-        if (visited[to]) {
-          continue;
-        }
-
-        if (cost <= min_cost) {
-          min_cost = cost;
-          min_node = to;
-        }
+    for (int j = 0; j < n; ++j) {
+      if (!visited[j] && min_cost > costs[j]) {
+        min_cost = costs[j];
+        min_node = j;
       }
     }
 
     total_cost += min_cost;
     visited[min_node] = true;
-    nodes.push_back(min_node);
+
+    for (int j = 0; j < n; ++j) {
+      if (costs[j] > graph[min_node][j]) {
+        costs[j] = graph[min_node][j];
+      }
+    }
   }
 
   cout << total_cost << endl;
