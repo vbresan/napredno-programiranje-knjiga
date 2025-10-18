@@ -9,12 +9,12 @@ a, b (0 <= a,b < n) i c (1 <= c <= 1000) koji opisuju plan za izgradnju
 dvosmjerne ceste između gradova a i b koja košta c novaca. Ispiši najmanji
 potreban trošak za povezivanje svih n gradova. (Gradovi će se moći povezati.)
 
+output: 32
+
 */
 
-#include <algorithm>
 #include <iostream>
 #include <limits>
-#include <utility>
 #include <vector>
 using namespace std;
 
