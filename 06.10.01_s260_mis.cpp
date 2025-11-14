@@ -18,16 +18,13 @@ Output: 256
 #include <vector>
 using namespace std;
 
-vector<vector<pair<int, int>>> tree;
-
-long long dfs(int parent, int node) {
+long long dfs(const vector<vector<pair<int, int>>>& tree, int parent, int node) {
 
   long long maxDistance = 0;
 
-  for (int i = 0, size = tree[node].size(); i < size; ++i) {
-    if (tree[node][i].first != parent) {
-      maxDistance = max(maxDistance,
-                        dfs(node, tree[node][i].first) + tree[node][i].second);
+  for (const auto& [neighbor, weight] : tree[node]) {
+    if (neighbor != parent) {
+      maxDistance = max(maxDistance, dfs(tree, node, neighbor) + weight);
     }
   }
 
@@ -38,7 +35,8 @@ int main() {
 
   int n, x;
   cin >> n >> x;
-  tree.insert(tree.begin(), n, vector<pair<int, int>>());
+
+  vector<vector<pair<int, int>>> tree(n);
 
   long long edgeSum = 0;
   for (int i = 0; i < n - 1; ++i) {
@@ -48,13 +46,13 @@ int main() {
     --a;
     --b;
 
-    tree[a].push_back(make_pair(b, c));
-    tree[b].push_back(make_pair(a, c));
+    tree[a].emplace_back(b, c);
+    tree[b].emplace_back(a, c);
 
     edgeSum += c;
   }
 
-  cout << 2 * edgeSum - dfs(-1, x - 1) << endl;
+  cout << 2 * edgeSum - dfs(tree, -1, x - 1) << endl;
 
   return 0;
 }
