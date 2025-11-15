@@ -19,38 +19,31 @@ Output: 225
 #include <iostream>
 #include <utility>
 #include <vector>
-
 using namespace std;
 
 typedef vector<vector<pair<int, int>>> Tree;
+long long diameter = 0;
 
-long long longest = 0;
+long long dfs(const Tree &tree, int parent, int node) {
 
-int dfs(const Tree &tree, int distance, int parent, int node) {
-
-  long long longest1 = 0, longest2 = 0, current = 0;
+  long long max1 = 0, max2 = 0;
 
   for (const auto &[neighbor, weight] : tree[node]) {
     if (neighbor != parent) {
-      current = dfs(tree, distance + weight, node, neighbor) + weight;
+      long long pathLength = dfs(tree, node, neighbor) + weight;
 
-      if (current >= longest1) {
-        longest2 = longest1;
-        longest1 = current;
-      } else if (current > longest2) {
-        longest2 = current;
+      if (pathLength >= max1) {
+        max2 = max1;
+        max1 = pathLength;
+      } else if (pathLength > max2) {
+        max2 = pathLength;
       }
     }
   }
 
-  if (longest1 + longest2 > longest) {
-    longest = longest1 + longest2;
-  }
-  if (longest1 + distance > longest) {
-    longest = longest1 + distance;
-  }
+  diameter = max(diameter, max1 + max2);
 
-  return longest1;
+  return max1;
 }
 
 int main() {
@@ -72,14 +65,9 @@ int main() {
     edgesSum += c;
   }
 
-  for (int i = 0; i < n; ++i) {
-    if (tree[i].size() == 1) {
-      dfs(tree, 0, -1, i);
-      break;
-    }
-  }
+  dfs(tree, -1, 0);
 
-  cout << 2 * edgesSum - longest << endl;
+  cout << 2 * edgesSum - diameter << endl;
 
   return 0;
 }
