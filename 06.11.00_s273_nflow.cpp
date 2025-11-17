@@ -15,14 +15,6 @@ using namespace std;
 
 constexpr int INF = numeric_limits<int>::max();
 
-void print(vector<int> items) {
-
-  for (int item : items) {
-    cout << item << ' ';
-  }
-  cout << endl;
-}
-
 int main() {
 
   int n, m, start, end;
@@ -41,37 +33,34 @@ int main() {
   while (true) {
 
     vector<bool> visited(n);
-    vector<int> flows(n);
-    flows[0] = INF;
+    vector<int> maxFlowToNode(n);
+    maxFlowToNode[start] = INF;
 
     for (int i = 0; i < n - 1; ++i) {
 
       int node, maxFlow = -1;
       for (int j = 0; j < n; ++j) {
-        if (!visited[j] && flows[j] > maxFlow) {
+        if (!visited[j] && maxFlowToNode[j] > maxFlow) {
           node = j;
-          maxFlow = flows[j];
+          maxFlow = maxFlowToNode[j];
         }
       }
       visited[node] = true;
       for (int j = 0; j < n; ++j) {
 
         int minFlow = min(maxFlow, graph[node][j]);
-        if (minFlow > flows[j]) {
-          flows[j] = minFlow;
+        if (minFlow > maxFlowToNode[j]) {
+          maxFlowToNode[j] = minFlow;
           parent[j] = node;
         }
       }
-      // cout << maxFlow << ' ' << node << endl;
-      // print(parent);
-      // print(flows);
     }
 
-    if (flows[end] == 0) {
+    if (maxFlowToNode[end] == 0) {
       break;
     }
 
-    int flow = flows[end];
+    int flow = maxFlowToNode[end];
     networkFlow += flow;
 
     int node = end;
@@ -80,7 +69,6 @@ int main() {
       graph[node][parent[node]] += flow;
       node = parent[node];
     }
-    // cout << flow << endl;
   }
 
   cout << networkFlow << endl;
