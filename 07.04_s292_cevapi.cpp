@@ -1,3 +1,18 @@
+/*
+Na roštilju se nalazi n 1-indeksiranih ćevapa. Svaki ćevap ima dvije strane 
+A i B. Na početku su svi ćevapi okrenuti na stranu A. Unos se sastoji od 
+brojeva n (1 <= n <= 100000) i m (1 <= m <= 100000), zatim m parova brojeva 
+x i y. Par brojeva x i y opisuje jedan od dva moguća događaja. Ako je x==0 
+onda treba ispisati na koju stranu je okrenut ćevap y (A ili B). Ako x
+nije nula, onda na roštilju okrećemo sve ćevape od x do y, uključno.
+
+Ispis:
+B
+B
+A
+
+*/
+
 #include <iostream>
 #include <vector>
 using namespace std;
