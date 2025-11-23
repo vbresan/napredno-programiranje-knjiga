@@ -17,18 +17,18 @@ A
 #include <vector>
 using namespace std;
 
-void add(vector<int> &fwt, int index, int value) {
+void add(vector<int> &fenwick, int index, int value) {
 
-  for (int max = fwt.size(); index < max; index += index & -index) {
-    fwt[index] += value;
+  for (int max = fenwick.size(); index < max; index += index & -index) {
+    fenwick[index] += value;
   }
 }
 
-int peek(vector<int> &fwt, int index) {
+int peek(vector<int> &fenwick, int index) {
 
   int value = 0;
   for (; index > 0; index -= index & -index) {
-    value += fwt[index];
+    value += fenwick[index];
   }
   return value;
 }
@@ -38,17 +38,18 @@ int main() {
   int n, m;
   cin >> n >> m;
 
-  vector<int> fwt(n);
+  vector<int> fenwick(n + 2); 
+  // Fenwick tree is 1-indexed. Also, we modify y + 1, and y can be n.
 
   for (int i = 0; i < m; ++i) {
 
     int x, y;
     cin >> x >> y;
     if (x) {
-      add(fwt, x, 1);
-      add(fwt, y + 1, -1);
+      add(fenwick, x, 1);
+      add(fenwick, y + 1, -1);
     } else {
-      cout << (char)((peek(fwt, y) & 1) + 'A') << endl;
+      cout << (char)((peek(fenwick, y) & 1) + 'A') << endl;
     }
   }
   return 0;
