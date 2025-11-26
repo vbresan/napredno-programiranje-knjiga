@@ -22,7 +22,7 @@ int main() {
   int n;
   cin >> n;
 
-  vector<double> dolars(n + 1, 0);
+  vector<double> dollars(n + 1, 0);
   vector<double> euros(n + 1, 0);
   vector<double> rates(n + 1, 0);
   euros[0] = 1000;
@@ -31,8 +31,8 @@ int main() {
     cin >> rates[i];
   }
   for (int i = 1; i <= n; ++i) {
-    dolars[i] = max(dolars[i - 1], euros[i - 1] * rates[i]);
-    euros[i] = max(euros[i - 1], dolars[i - 1] / rates[i]);
+    dollars[i] = max(dollars[i - 1], euros[i - 1] * rates[i]);
+    euros[i] = max(euros[i - 1], dollars[i - 1] / rates[i]);
   }
 
   cout << euros[n] << endl;

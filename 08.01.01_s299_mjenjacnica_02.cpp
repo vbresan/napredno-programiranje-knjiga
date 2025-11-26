@@ -21,15 +21,15 @@ int main() {
   int n;
   cin >> n;
 
-  double dolars = 0;
+  double dollars = 0;
   double euros = 1000;
 
   for (int i = 0; i < n; ++i) {
 
-    double rate, dolarsPrevious = dolars, eurosPrevious = euros;
+    double rate, dollarsPrevious = dollars, eurosPrevious = euros;
     cin >> rate;
-    dolars = max(dolarsPrevious, eurosPrevious * rate);
-    euros = max(eurosPrevious, dolarsPrevious / rate);
+    dollars = max(dollarsPrevious, eurosPrevious * rate);
+    euros = max(eurosPrevious, dollarsPrevious / rate);
   }
 
   cout << euros << endl;
