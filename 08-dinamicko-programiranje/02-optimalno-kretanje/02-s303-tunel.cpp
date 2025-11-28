@@ -16,3 +16,41 @@ Ispiši koliko minimalno puta morate biti pregaženi.
 
 Ispis: 2
 */
+
+#include <algorithm>
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+
+  int n;
+  string s;
+
+  cin >> n;
+  cin >> s;
+
+  vector<int> dp(5);
+  for (int i = 0; i < 5; ++i) {
+    dp[i] = (s[i] == 'x');
+  }
+
+  for (int i = 1; i < n; ++i) {
+    cin >> s;
+    vector<int> previous = dp;
+    for (int j = 0; j < 5; ++j) {
+      int value = s[j] == 'x';
+      dp[j] = previous[j] + value;
+      if (j > 0) {
+        dp[j] = min(dp[j], previous[j - 1] + value);
+      }
+      if (j < 4) {
+        dp[j] = min(dp[j], previous[j + 1] + value);
+      }
+    }
+  }
+
+  cout << *min_element(dp.begin(), dp.end()) << endl;
+
+  return 0;
+}
