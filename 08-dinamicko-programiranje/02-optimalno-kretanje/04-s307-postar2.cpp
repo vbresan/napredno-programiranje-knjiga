@@ -10,4 +10,7 @@ lijevog kuta prema donjem desnom isključivo prema dolje ili desno. Ista se
 pisma ne mogu pokupiti dvaput. Koliko najviše pisama poštar može uzeti?
 Ulazni podaci su n i m (3 <= n,m <= 50), zatim n redova koji sadrže niz od m
 brojeva t (0 <=t <= 9).
+
+Ispis: 196
+
 */
