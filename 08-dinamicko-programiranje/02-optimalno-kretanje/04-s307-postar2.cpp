@@ -21,8 +21,6 @@ Ispis: 196
 #include <vector>
 using namespace std;
 
-int DP[50][50][50][50];
-
 int main() {
 
   int n, m;
@@ -32,6 +30,11 @@ int main() {
   for (int i = 0; i < n; ++i) {
     cin >> unos[i];
   }
+
+  vector<vector<vector<vector<int>>>> DP(n, 
+    vector<vector<vector<int>>>(m, 
+      vector<vector<int>>(m, 
+        vector<int>(m, 0))));
 
   for (int i = 0; i < n; ++i) {
     for (int j1 = 0; j1 < m; ++j1) {
