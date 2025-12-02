@@ -41,15 +41,6 @@ int main() {
     }
   }
 
-  // print the room
-  for (int row = 0; row < n; ++row) {
-    for (int column = 0; column < m; ++column) {
-      cout << room[row][column];
-    }
-    cout << endl;
-  }
-  cout << endl;  
-
   int total = 0;
   for (int i = 0; i < 3; ++i) {
 
@@ -64,15 +55,6 @@ int main() {
         dp[row][column] += max(dp[row][column - 1], dp[row - 1][column]);
       }
     }
-
-      // print the solution
-    for (int row = 0; row < n; ++row) {
-      for (int column = 0; column < m; ++column) {
-        cout << dp[row][column] << ' ';
-      }
-      cout << endl;
-    }
-    cout << endl;
 
     total += dp[n - 1][m - 1];
 
@@ -93,15 +75,6 @@ int main() {
         }
       }
     }
-
-    // print the room
-    for (int row = 0; row < n; ++row) {
-      for (int column = 0; column < m; ++column) {
-        cout << room[row][column];
-      }
-      cout << endl;
-    }
-    cout << endl;
   }
 
   cout << total << endl;
