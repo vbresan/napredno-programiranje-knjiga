@@ -17,3 +17,40 @@ traktor može biti iznajmljen.
 
 Ispis: 11
 */
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+constexpr int NINF = numeric_limits<int>::min();
+
+int main() {
+
+  int n, m;
+  cin >> n >> m;
+
+  vector<vector<int>> requests(m + 1);
+  vector<bool> hasRequests(m + 1);
+  for (int i = 0; i < n; ++i) {
+    int a, b;
+    cin >> a >> b;
+    requests[b].push_back(a);
+    hasRequests[a] = true;
+  }
+
+  vector<int> dp(m + 1, NINF);
+  dp[0] = 0;
+  for (int i = 1; i <= m; ++i) {
+    if (!hasRequests[i - 1]) {
+      dp[i] = dp[i - 1];
+    }
+    for (int j = 0, size = requests[i].size(); j < size; ++j) {
+      int start = requests[i][j];
+      dp[i] = max(dp[i], dp[start] + (i - start));
+    }
+  }
+
+  cout << dp[m] << endl;
+
+  return 0;
+}
