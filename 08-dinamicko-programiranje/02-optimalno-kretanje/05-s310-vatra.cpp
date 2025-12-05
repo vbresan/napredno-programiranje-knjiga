@@ -14,3 +14,36 @@ minimalnu štetu koja će nastati pri gašenju svih drveća.
 
 Ispis: 393
 */
+
+#include <algorithm>
+#include <iostream>
+#include <limits>
+#include <vector>
+using namespace std;
+
+constexpr int INF = numeric_limits<int>::max() / 2;
+
+int main() {
+
+  int n, m;
+  cin >> n >> m;
+
+  vector<int> damage(n);
+  for (int i = 0; i < n; ++i) {
+    cin >> damage[i];
+  }
+
+  vector<vector<int>> dp(n, vector<int>(n, INF));
+  dp[m][m] = damage[m];
+
+  for (int i = 1; i < n; ++i) {
+    for (int j = 0; j < n - i; ++j) {
+      dp[j][j + i] = min(dp[j + 1][j + i] + damage[j] * (i + 1),
+                         dp[j][j + i - 1] + damage[j + i] * (i + 1));
+    }
+  }
+
+  cout << dp[0][n - 1] << endl;
+
+  return 0;
+}
