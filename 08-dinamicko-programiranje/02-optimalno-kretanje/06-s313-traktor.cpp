@@ -19,6 +19,7 @@ Ispis: 11
 */
 
 #include <iostream>
+#include <limits>
 #include <vector>
 using namespace std;
 
@@ -44,8 +45,7 @@ int main() {
     if (!hasRequests[i - 1]) {
       dp[i] = dp[i - 1];
     }
-    for (int j = 0, size = requests[i].size(); j < size; ++j) {
-      int start = requests[i][j];
+    for (int start : requests[i]) {
       dp[i] = max(dp[i], dp[start] + (i - start));
     }
   }
