@@ -13,3 +13,39 @@ donje desno će uvijek biti prohodno.
 
 Ispis: 8
 */
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+
+  int n, m;
+  cin >> n >> m;
+
+  vector<int> dp[2];
+  dp[0].insert(dp[0].begin(), m, 0);
+  dp[1].insert(dp[1].begin(), m, 0);
+
+  string s;
+  cin >> s;
+
+  for (int i = 0; i < m && s[i] == '.'; ++i) {
+    dp[0][i] = 1;
+  }
+
+  for (int i = 1; i < n; ++i) {
+    cin >> s;
+    for (int j = 0; j < m; ++j) {
+      if (s[j] == '.') {
+        dp[i & 1][j] = dp[(i - 1) & 1][j] + (j ? dp[i & 1][j - 1] : 0);
+        dp[i & 1][j] %= 1000000;
+      } else {
+        dp[i & 1][j] = 0;
+      }
+    }
+  }
+
+  cout << dp[(n - 1) & 1][m - 1] << endl;
+  return 0;
+}
