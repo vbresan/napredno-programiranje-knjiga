@@ -24,8 +24,8 @@ int main() {
   cin >> n >> m;
 
   vector<int> dp[2];
-  dp[0].insert(dp[0].begin(), m, 0);
-  dp[1].insert(dp[1].begin(), m, 0);
+  dp[0].resize(m, 0);
+  dp[1].resize(m, 0);
 
   string s;
   cin >> s;
