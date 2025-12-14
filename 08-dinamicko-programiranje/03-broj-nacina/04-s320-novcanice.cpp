@@ -1,6 +1,6 @@
 /*
 Na koliko načina možete isplatiti x (1 <=x <= 10000) kuna, koristeći n
-(1 <=n <= 100) vrsta novčanica? Ulazni podaci su n i x, zatim n cijelih
+(1 <= n <= 100) vrsta novčanica? Ulazni podaci su n i x, zatim n cijelih
 brojeva a (1 <= a <= x) koje opisuju s kojim vrstama novčanica raspolažemo
 (novčanice će biti međusobno različite). Kao rješenje ispisite ostatak pri
 dijeljenju nacina isplate s 1000000.
