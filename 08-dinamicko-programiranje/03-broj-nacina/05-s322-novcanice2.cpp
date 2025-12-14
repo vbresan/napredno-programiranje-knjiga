@@ -18,22 +18,22 @@ int main() {
   int n, x;
   cin >> n >> x;
 
-  vector<int> dp(x + 1);
-  dp[0] = 1;
+  vector<bool> dp(x + 1);
+  dp[0] = true;
 
-  vector<int> bills(n);
-  for (int i = 0; i < n; ++i) {
-    cin >> bills[i];
+  vector<int> denominations(n);
+  for (int & denomination : denominations) {
+    cin >> denomination;
   }
 
   int count = 0;
   for (int i = 1; i <= x; ++i) {
     for (int j = 0; j < n; ++j) {
-      if (i - bills[j] >= 0) {
-        dp[i] |= dp[i - bills[j]];
+      if (i - denominations[j] >= 0) {
+        dp[i] = dp[i] || dp[i - denominations[j]];
       }
     }
-    count += dp[i];
+    count += dp[i]? 1 : 0;
   }
 
   cout << count << endl;
