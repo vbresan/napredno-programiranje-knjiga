@@ -15,7 +15,7 @@ a `x` mora biti prosti broj.
 `(a / b) % x == (a * pow(b, x - 2, x)) % x`
 
 ```
-int pow(long long base, int n, int x) {  // (base ^ n) % x
+long long pow(long long base, int n, int x) {  // (base ^ n) % x
     long long result = 1;
     while (n) {
         if (n & 1) {
