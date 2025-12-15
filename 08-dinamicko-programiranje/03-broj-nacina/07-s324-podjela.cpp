@@ -10,6 +10,21 @@ Ispis: 7
 #include <iostream>
 #include <vector>
 using namespace std;
+
+const int mod = 999907;
+
+long long pow(long long base, int n, int x) { // (base ^ n) % x
+  long long result = 1;
+  while (n) {
+    if (n & 1) {
+      result = (result * base) % x;
+    }
+    base = (base * base) % x;
+    n >>= 1;
+  }
+  return result;
+}
+
 int main() {
 
   int n;
@@ -33,11 +48,11 @@ int main() {
 
   for (const int number : numbers) {
     for (int i = sum - number; i >= 0; --i) {
-      dp[i + number] += dp[i];
+      dp[i + number] = (dp[i + number] + dp[i]) % mod;
     }
   }
 
-  cout << dp[sum] / 2 << endl;
+  cout << (dp[sum] * pow(2, mod - 2, mod)) % mod << endl;
 
   return 0;
 }
