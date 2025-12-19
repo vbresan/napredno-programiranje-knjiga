@@ -8,3 +8,27 @@ Ispišite najveću sumu nekih uzastopnih brojeva u unesenom nizu.
 
 Ispis: 21
 */
+
+#include <algorithm>
+#include <iostream>
+using namespace std;
+
+int main() {
+
+  int n;
+  cin >> n;
+
+  int dp = 0, maximum = 0;
+  for (int i = 0; i < n; ++i) {
+
+    int input;
+    cin >> input;
+
+    dp = max(dp + input, 0);
+    maximum = max(maximum, dp);
+  }
+
+  cout << maximum << endl;
+
+  return 0;
+}
