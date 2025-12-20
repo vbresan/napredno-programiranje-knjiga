@@ -25,14 +25,11 @@ int main() {
     int number;
     cin >> number;
 
-    if (mins.back() <= number) {
+    vector<int>::iterator upper = upper_bound(mins.begin(), mins.end(), number);
+    if (upper == mins.end()) {
       mins.push_back(number);
-    }
-
-    for (int j = mins.size() - 2; j >= 0; --j) {
-      if (mins[j] <= number) {
-        mins[j + 1] = min(mins[j + 1], number);
-      }
+    } else {
+      *upper = number;
     }
   }
 
