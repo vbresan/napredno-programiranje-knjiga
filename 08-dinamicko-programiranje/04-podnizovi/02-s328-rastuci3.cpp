@@ -9,12 +9,14 @@ Ispis: 6
 #include <algorithm>
 #include <iostream>
 #include <vector>
+#include <limits>
 using namespace std;
 
 constexpr int NINF = numeric_limits<int>::min();
 
 int main() {
 
+  // the smallest ending value for each subsequence length
   vector<int> mins;
   mins.push_back(NINF);
 
