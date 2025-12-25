@@ -21,27 +21,28 @@ int main() {
   int n, x;
   cin >> n >> x;
 
-  vector<pair<double, int>> pairs;
+  vector<pair<double, int>> sandTypes;
   for (int i = 0; i < n; ++i) {
 
     int a, b;
     cin >> a >> b;
 
-    pairs.emplace_back((double)b / a, a);
+    sandTypes.emplace_back((double)b / a, a);
   }
 
-  sort(pairs.begin(), pairs.end());
+  sort(sandTypes.rbegin(), sandTypes.rend());
 
-  int totalValue = 0, remainingCapacity = x;
-  while (remainingCapacity) {
-
-    const auto &[itemPrice, itemAmount] = pairs.back();
-    int currentAmount = min(remainingCapacity, itemAmount);
-
-    totalValue += currentAmount * itemPrice;
+  double totalValue = 0;
+  int remainingCapacity = x;
+  for (const auto &[valuePerCubic, availableAmount] : sandTypes) {
+      
+    if (remainingCapacity == 0) {
+      break;
+    } 
+      
+    int currentAmount = min(remainingCapacity, availableAmount);
+    totalValue += currentAmount * valuePerCubic;
     remainingCapacity -= currentAmount;
-
-    pairs.pop_back();
   }
 
   cout << totalValue << endl;
