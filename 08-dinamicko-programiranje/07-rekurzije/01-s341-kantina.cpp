@@ -31,17 +31,17 @@ const int MEALS_NUM = 5;
 const int SERVING_TIME = 10;
 constexpr int INF = numeric_limits<int>::max() / 2;
 
-int recursion(vector<vector<vector<int>>> &dp, const vector<int> &orders,
+int recursion(vector<vector<vector<int>>> &memo, const vector<int> &orders,
               const int carryTimes[], int a, int b, int orderIndex) {
 
   if (orderIndex == -1) {
     return 0;
   }
-  if (dp[a][b][orderIndex] != INF) {
-    return dp[a][b][orderIndex];
+  if (memo[a][b][orderIndex] != INF) {
+    return memo[a][b][orderIndex];
   }
   if (a != orders[orderIndex] && b != orders[orderIndex]) {
-    return (dp[a][b][orderIndex] = INF);
+    return (memo[a][b][orderIndex] = INF);
   }
 
   int result = INF;
@@ -49,7 +49,7 @@ int recursion(vector<vector<vector<int>>> &dp, const vector<int> &orders,
     for (int i = 0; i < MEALS_NUM; ++i) {
       if (i != a) {
         result = min(result,
-                     recursion(dp, orders, carryTimes, i, b, orderIndex - 1) +
+                     recursion(memo, orders, carryTimes, i, b, orderIndex - 1) +
                          carryTimes[i] + carryTimes[a] + SERVING_TIME);
       }
     }
@@ -58,15 +58,16 @@ int recursion(vector<vector<vector<int>>> &dp, const vector<int> &orders,
     for (int i = 0; i < MEALS_NUM; ++i) {
       if (i != b) {
         result = min(result,
-                     recursion(dp, orders, carryTimes, a, i, orderIndex - 1) +
+                     recursion(memo, orders, carryTimes, a, i, orderIndex - 1) +
                          carryTimes[i] + carryTimes[b] + SERVING_TIME);
       }
     }
   }
-  result = min(result, recursion(dp, orders, carryTimes, a, b, orderIndex - 1) +
-                           SERVING_TIME);
+  result =
+      min(result, recursion(memo, orders, carryTimes, a, b, orderIndex - 1) +
+                      SERVING_TIME);
 
-  return (dp[a][b][orderIndex] = result);
+  return (memo[a][b][orderIndex] = result);
 }
 
 int main() {
@@ -85,11 +86,11 @@ int main() {
     --orders[i];
   }
 
-  vector<vector<vector<int>>> dp(
+  vector<vector<vector<int>>> memo(
       MEALS_NUM, vector<vector<int>>(MEALS_NUM, vector<int>(ordersNum, INF)));
   int result = INF;
   for (int i = 0; i < MEALS_NUM; ++i) {
-    result = min(result, recursion(dp, orders, carryTimes, i,
+    result = min(result, recursion(memo, orders, carryTimes, i,
                                    orders[ordersNum - 1], ordersNum - 1));
   }
 
