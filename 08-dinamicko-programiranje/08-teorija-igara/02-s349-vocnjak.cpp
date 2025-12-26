@@ -16,3 +16,62 @@ onda Save pobjeđuje jer je Johnny prvi krenuo.
 
 Ispis: Johnny
 */
+
+#include <algorithm>
+#include <iostream>
+#include <limits>
+#include <string>
+#include <vector>
+using namespace std;
+
+constexpr int INF = numeric_limits<int>::max() / 2;
+
+int main() {
+
+  int n, m;
+  cin >> n >> m;
+
+  vector<string> field(n);
+  for (int i = 0; i < n; ++i) {
+    cin >> field[i];
+  }
+
+  for (int i = 0; i < n; ++i) {
+    for (int j = 0; j < m; ++j) {
+      if (field[i][j] == '.') {
+        field[i][j] = '0';
+      }
+      field[i][j] -= '0';
+    }
+  }
+
+  vector<vector<int>> dp(n, vector<int>(m));
+  for (int i = n - 1; i >= 0; --i) {
+    for (int j = m - 1; j >= 0; --j) {
+      if (i == n - 1 && j == m - 1) {
+        continue;
+      }
+      if ((i + j) & 1) { // odd moves are by Save
+        dp[i][j] = INF;
+        if (i < n - 1) {
+          dp[i][j] = min(dp[i][j], dp[i + 1][j] - field[i + 1][j]);
+        }
+        if (j < m - 1) {
+          dp[i][j] = min(dp[i][j], dp[i][j + 1] - field[i][j + 1]);
+        }
+      } else { // even moves are by Johnny
+        dp[i][j] = -INF;
+        if (i < n - 1) {
+          dp[i][j] = max(dp[i][j], dp[i + 1][j] + field[i + 1][j]);
+        }
+        if (j < m - 1) {
+          dp[i][j] = max(dp[i][j], dp[i][j + 1] + field[i][j + 1]);
+        }
+      }
+    }
+  }
+
+  cout << ((dp[0][0] > 0) ? "Johnny" : "Save") << endl;
+
+  return 0;
+}
