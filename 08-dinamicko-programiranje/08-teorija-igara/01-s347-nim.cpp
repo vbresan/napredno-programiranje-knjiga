@@ -7,3 +7,15 @@ oba igrača igraju optimalno.
 
 Ispis: B
 */
+
+#include <iostream>
+using namespace std;
+
+int main() {
+
+  int n;
+  cin >> n;
+
+  cout << (char)(!(n % 4) + 'A') << endl;
+  return 0;
+}
