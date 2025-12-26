@@ -14,3 +14,14 @@ a inace 0.
 
 Ispis: 1
 */
+
+int column;
+for (int i = 0; i < n; i++) { // rows
+  column = m - 1;
+  for (int j = m - 1; j >= 0; --j) {
+    if (input[i][j] == 'o') {
+      column = j - 1;
+    }
+    right[i][j] = column;
+  }
+}
