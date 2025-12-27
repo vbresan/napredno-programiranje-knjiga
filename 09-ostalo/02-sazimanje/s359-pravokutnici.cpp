@@ -6,4 +6,12 @@ predstavljaju gornju lijevu i donju desnu koordinatu koju će pravokutnik zauzet
 na stolu. Pravokutnike stavljamo jedan preko drugog na stol, počevši od prvog
 unesenog. Ispišite redom za svaki pravokutnik koliki postotak njegove površine
 je vidljiv nakon što sve pravokutnike stavimo na stol.
+
+Ispis:
+45%
+66.6667%
+100%
+87.5%
+100%
+
 */
