@@ -14,4 +14,16 @@ dijeljenju rješenja s 1000000.)
 
 Ispis:
 3153 2984 2789 3011 2689 3201 2909
+
+Rjesenje = matricaPrijelaza^(n - 1) * prviDan
+
+Matrica prijelaza:
+2 1 0 0 0 0 3
+3 1 2 0 0 0 0
+0 3 1 2 0 0 0
+0 0 3 1 2 0 0
+0 0 0 3 1 2 0
+0 0 0 0 3 1 2
+2 0 0 0 0 3 1
+
 */
