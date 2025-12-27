@@ -19,3 +19,55 @@ uvijek moći otići do najistočnijeg kafica i natrag.
 
 Ispis: 9
 */
+
+#include <iostream>
+#include <limits>
+#include <vector>
+using namespace std;
+
+constexpr int NINF = numeric_limits<int>::min() / 2;
+
+int main() {
+
+  int n, m;
+  cin >> n >> m;
+
+  vector<vector<int>> graph(n), rgraph(n);
+  for (int i = 0; i < m; ++i) {
+
+    int a, b;
+    cin >> a >> b;
+
+    if (a == b) {
+      continue;
+    }
+
+    graph[a].push_back(b);
+    rgraph[b].push_back(a);
+  }
+
+  vector<vector<int>> dp(n, vector<int>(n, NINF));
+  dp[0][0] = 1;
+
+  for (int i = 0; i < n; ++i) {
+    for (int j = 0; j < n; ++j) {
+      if (i == j && i) {
+        continue;
+      }
+      for (int k = 0; k < graph[i].size(); ++k) {
+        if (graph[i][k] >= i && graph[i][k] >= j) {
+          dp[graph[i][k]][j] = max(dp[graph[i][k]][j], dp[i][j] + 1);
+        }
+      }
+      for (int k = 0; k < rgraph[j].size(); ++k) {
+        if (rgraph[j][k] >= i && rgraph[j][k] >= j) {
+          dp[i][rgraph[j][k]] = max(dp[i][rgraph[j][k]], dp[i][j] + 1);
+        }
+      }
+    }
+  }
+
+  cout << dp[n - 1][n - 1] - 1 << endl;
+
+  return 0;
+}
