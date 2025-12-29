@@ -14,3 +14,51 @@ optimalno (najveća težina koju netko nosi treba biti što manja, kako bi tim b
 
 Ispis: 20
 */
+
+#include <iostream>
+#include <ostream>
+#include <vector>
+using namespace std;
+
+int test(int allowed, const vector<int> &weights) {
+
+  int people = 1, load = 0;
+  for (int weight : weights) {
+    if (load + weight <= allowed) {
+      load += weight;
+    } else {
+      ++people;
+      load = weight;
+      if (load > allowed) {
+        return 10001;
+      }
+    }
+  }
+
+  return people;
+}
+
+int main() {
+
+  int n, m;
+  cin >> n >> m;
+
+  vector<int> weights(n);
+  for (int &weight : weights) {
+    cin >> weight;
+  }
+
+  int low = 0, high = 1000 * 100000;
+  while (high != low) {
+    int mid = (high + low) / 2;
+    if (test(mid, weights) <= m) {
+      high = mid;
+    } else {
+      low = mid + 1;
+    }
+  }
+
+  cout << low << endl;
+
+  return 0;
+}
