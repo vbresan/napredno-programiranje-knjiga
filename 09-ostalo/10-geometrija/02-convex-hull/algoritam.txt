@@ -1,0 +1,8 @@
+- sortiraj tocke u smjeru suprotnom od kazaljke na satu oko neke tocke koja ce biti unutar konveeksne ljuske
+- dodaj prve dvije tocke u rjesenje
+- za svaku od ostalih tocaka:
+  - dodaj tocku na kraj rjesenja
+  - dokle god u rjesenju postoje barem tri tocke, i zadnja tocka se ne "skrece" lijevo u odnosu na prethodne dvije (tj. dokle god je ccw <= 0):
+    - izbaci predzadnju tocku iz rjesenja
+- dokle god zadnje tri tocke ili zadnje dvije i prva, ili zadnja i prve dvije, ne "skrecu" lijevo izbaci srednju od te tri tocke koje ne "skrecu" lijevo
+
