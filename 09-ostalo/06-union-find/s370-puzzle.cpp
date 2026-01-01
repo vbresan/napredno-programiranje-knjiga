@@ -17,8 +17,8 @@ Ispis: 1010111
 #include <vector>
 using namespace std;
 
-int title(vector<int> &P, int x) {
-  return x == P[x] ? x : (P[x] = title(P, P[x]));
+int find(vector<int> &P, int x) {
+  return x == P[x] ? x : (P[x] = find(P, P[x]));
 }
 
 int main() {
@@ -35,7 +35,7 @@ int main() {
     int a, b;
     cin >> a >> b;
 
-    int Pa = title(P, a), Pb = title(P, b);
+    int Pa = find(P, a), Pb = find(P, b);
     if (a > b) {
       cout << (Pa == Pb);
     } else {
@@ -44,11 +44,9 @@ int main() {
       }
       if (D[Pa] > D[Pb]) {
         P[Pb] = Pa;
-      }
-      if (D[Pa] < D[Pb]) {
+      } else if (D[Pa] < D[Pb]) {
         P[Pa] = Pb;
-      }
-      if (D[Pa] == D[Pb]) {
+      } else { // D[Pa] == D[Pb]
         P[Pb] = Pa;
         ++D[Pa];
       }
