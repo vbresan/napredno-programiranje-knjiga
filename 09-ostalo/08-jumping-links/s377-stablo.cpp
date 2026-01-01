@@ -43,7 +43,7 @@ int main() {
 
   vector<int> link[LINK_HEIGHT];
   for (int i = 0; i < LINK_HEIGHT; ++i) {
-    link[i].insert(link[i].begin(), n, -1);
+    link[i].resize(n, -1);
   }
 
   vector<int> d(n, -1);
