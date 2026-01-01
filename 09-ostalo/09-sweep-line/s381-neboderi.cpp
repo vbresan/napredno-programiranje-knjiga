@@ -14,6 +14,7 @@ Ispis: 59
 #include <set>
 #include <utility>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 int main() {
