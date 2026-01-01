@@ -20,6 +20,9 @@ Ispis: 4
 #include <vector>
 using namespace std;
 
+const int sX[] = {0, 0, -1, 1};
+const int sY[] = {-1, 1, 0, 0};
+
 void floodFill(vector<string> &territory, vector<vector<short>> &a, const int x,
                const int y, const int height, const int n, bool &hasTaller,
                bool &hasShorter) {
@@ -29,8 +32,6 @@ void floodFill(vector<string> &territory, vector<vector<short>> &a, const int x,
 
   for (int i = 0; i < 4; ++i) {
 
-    const int sX[] = {0, 0, -1, 1};
-    const int sY[] = {-1, 1, 0, 0};
     const int nX = x + sX[i];
     const int nY = y + sY[i];
 
@@ -68,7 +69,7 @@ int main() {
     territory.push_back(s);
   }
 
-  vector<vector<short>> a(n, vector<short>(n));
+  vector<vector<short>> heightMap(n, vector<short>(n));
   bool hasTaller = false, hasShorter = false;
   int peaks = 0, bottoms = 0;
   int height;
@@ -78,7 +79,7 @@ int main() {
       if (territory[i][j] != '-') {
         height = territory[i][j] - 'a';
         hasTaller = hasShorter = false;
-        floodFill(territory, a, i, j, height, n, hasTaller, hasShorter);
+        floodFill(territory, heightMap, i, j, height, n, hasTaller, hasShorter);
         if (hasTaller && !hasShorter) {
           ++bottoms;
         }
