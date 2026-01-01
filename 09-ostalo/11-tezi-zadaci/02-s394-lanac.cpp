@@ -19,7 +19,7 @@ Ispis: 20
 #include <vector>
 using namespace std;
 
-int test(int allowed, const vector<int> &weights) {
+int minPeopleNeeded(int allowed, const vector<int> &weights) {
 
   int people = 1, load = 0;
   for (int weight : weights) {
@@ -50,7 +50,7 @@ int main() {
   int low = 0, high = 1000 * 100000;
   while (high != low) {
     int mid = (high + low) / 2;
-    if (test(mid, weights) <= m) {
+    if (minPeopleNeeded(mid, weights) <= m) {
       high = mid;
     } else {
       low = mid + 1;
