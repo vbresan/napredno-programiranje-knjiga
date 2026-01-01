@@ -16,7 +16,6 @@ Ispis: 20
 */
 
 #include <iostream>
-#include <ostream>
 #include <vector>
 using namespace std;
 
